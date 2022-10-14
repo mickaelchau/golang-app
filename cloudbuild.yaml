@@ -2,10 +2,7 @@ steps:
     # Run tests and save to file
   - name: golang:1.18
     entrypoint: /bin/bash
-    args:
-      - -c
-      - |
-        go test
+    args: ['go', 'test']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/micka-cloud-run-365208/golang-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
