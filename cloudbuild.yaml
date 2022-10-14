@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/micka-cloud-run-365208/golang-app', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/micka-cloud-run-365208/golang-app']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'golang-app', '--image', 'gcr.io/micka-cloud-run-365208/golang-app', '--region', 'europe-west6']
+images:
+- gcr.io/micka-cloud-run-365208/golang-app
