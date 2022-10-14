@@ -1,6 +1,6 @@
 steps:
   - name: 'registry.hub.docker.com/library/golang'
-    args: ['test']
+    args: ['go', test']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/micka-cloud-run-365208/golang-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
