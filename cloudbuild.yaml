@@ -4,12 +4,12 @@ steps:
     entrypoint: /bin/bash
     args: ['go', 'test']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/micka-cloud-run-365208/golang-app', '.']
+    args: ['build', '-t', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/golang-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/micka-cloud-run-365208/golang-app']
+    args: ['push', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/golang-app']
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'golang-app', '--image', 'gcr.io/micka-cloud-run-365208/golang-app', '--region', 'europe-west6']
+    args: ['run', 'deploy', 'golang-app', '--image', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/golang-app', '--region', 'europe-west6']
 images:
-  - gcr.io/micka-cloud-run-365208/golang-app
+  - europe-west6-docker.pkg.dev/micka-cloud-run-365208/golang-app
   
