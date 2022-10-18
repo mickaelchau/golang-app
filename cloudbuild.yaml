@@ -9,8 +9,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['image', 'ls']
-  - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app']
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
