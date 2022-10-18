@@ -15,7 +15,7 @@ steps:
     args: ['run', 'deploy', 'golang-app', '--image', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app', '--no-traffic', '--region', 'europe-west6', '--tag', 'a$SHORT_SHA']
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['beta', 'run', 'services', 'update-traffic', 'golang-app', '--image', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app', '--to-tags', 'a$SHORT_SHA=25']
+    args: ['beta', 'run', 'services', 'update-traffic', 'golang-app', '--to-tags', 'a$SHORT_SHA=25']
 images:
   - europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app
   
