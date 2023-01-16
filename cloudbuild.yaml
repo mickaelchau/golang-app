@@ -1,24 +1,20 @@
 steps:
-    # Run tests and save to file
-  - name: golang:1.18
-    entrypoint: /bin/bash
-    args:
-      - -c
-      - | 
-        go test
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_REGISTRY}/${_APP_NAME}', '.']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '${_REGISTRY}/${_APP_NAME}']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['run', 'deploy', '${_APP_NAME}-service', '--image', '${_REGISTRY}/${_APP_NAME}', '--no-traffic', '--region', '$LOCATION', '--tag', 'a$SHORT_SHA']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['beta', 'run', 'services', 'update-traffic', '${_APP_NAME}-service', '--to-tags', 'a$SHORT_SHA=25', '--region', '$LOCATION']
-substitutions:
-  _REGISTRY: "fill"
-  _APP_NAME: "app_name"  
+        # Run tests and save to file
+- name: golang:1.18
+  entrypoint: /bin/bash
+  args:
+    - -c
+    - | 
+      go test
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'golang-app', '--image', 'europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app', '--no-traffic', '--region', 'europe-west6', '--tag', 'a$SHORT_SHA']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['beta', 'run', 'services', 'update-traffic', 'golang-app', '--to-tags', 'a$SHORT_SHA=25', '--region', 'europe-west6']
 images:
-  - '${_REGISTRY}/${_APP_NAME}'
-  
+- europe-west6-docker.pkg.dev/micka-cloud-run-365208/demo-apps/golang-app
