@@ -18,14 +18,23 @@ pipeline {
 
         stage('Go Test') {
             steps {
-                sh 'go test -v ./...'
+                script {
+                    docker.image('golang:1.18').inside {
+                        sh 'go test -v ./...'
+                    }
+                }
             }
         }
 
         stage('Go Build') {
             steps {
-                sh 'go build -o myapp'
+                script {
+                    docker.image('golang:1.18').inside {
+                        sh 'go build -o myapp'
+                    }
+                }
             }
+                    
         }
 
         stage('Build Docker Image') {
